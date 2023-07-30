@@ -1,7 +1,7 @@
-import mongose from 'mongose';
+import mongoose from 'mongoose';
 
 // create schema
-const userSchema = mongose.Schema({
+const userSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -37,4 +37,4 @@ const userSchema = mongose.Schema({
 });
 
 // export schema
-export default mongose.modal('User', userSchema);
+export default mongoose.models.User || mongoose.model('User', userSchema);

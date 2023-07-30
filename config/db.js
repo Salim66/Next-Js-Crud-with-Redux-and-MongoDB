@@ -1,9 +1,9 @@
-import mongose from 'mongose';
+import mongoose from 'mongoose';
 
 // create connection
 const connectMongoDB = async () => {
     try {
-        const connect = mongose.connect(process.env.MONGO);
+        const connect = mongoose.connect(process.env.MONGO);
         console.log('MongoDB connected successfully')
     } catch (error) {
         console.log(error.message);
