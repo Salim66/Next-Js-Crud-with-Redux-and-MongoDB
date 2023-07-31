@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUsers } from "./userApi";
+import { createUserApi, fetchUsers } from "./userApi";
 
 // create user slice
 const userSlice = createSlice({
@@ -11,6 +11,9 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchUsers.fulfilled, (state, action) => {
             state.users = action.payload;
+        })
+            .addCase(createUserApi.fulfilled, (state, action) => {
+                state.users.push(action.payload);
         })
     }
 });

@@ -1,12 +1,14 @@
 "use client"
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from './userSlice'
 import createUser from '@/libs/createUser';
+import { createUserApi, fetchUsers } from './userApi';
+import getAllUser from '@/libs/getAllUser';
 
 export default function User() {
-    const { user } = useSelector(selectUser);
-    console.log('users', user);
+    const { users } = useSelector(selectUser);
+    const dispatch = useDispatch();
 
     const [input, setInput] = useState({
         name: "",
@@ -23,9 +25,14 @@ export default function User() {
 
     const handleSubmitForm = async (e) => {
         e.preventDefault();
-        const data = await createUser(input);
-        console.log('data', data);
+        dispatch(createUserApi(input));
     }
+
+    useEffect(() => {
+        dispatch(fetchUsers);
+    }, [dispatch]);
+
+    console.log('users', users)
 
   return (
     <div >
